@@ -110,3 +110,13 @@ int CwPololuSerialServo::set_servo_number_base_number(
 	return 0;
 }
 
+void CwPololuSerialServo::blink_servo_number_base_number()
+{
+	unsigned char cmd[3];
+	// check validity of the base number.
+	cmd[0] = 0x80;
+	cmd[1] = 0x02;
+	cmd[2] = 0x0f;
+	_serial->write( cmd, 3 );
+	_serial->flush();
+}

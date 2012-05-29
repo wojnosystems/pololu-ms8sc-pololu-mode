@@ -162,6 +162,11 @@ class CwPololuSerialServo {
 		 *
 		 * You need to run this only with the controller running in Pololu mode, not Mini SSC II.
 		 *
+		 * Of special note, the documentation claims that the addressing goes from 0x00 to 0x10.
+		 * Elsewhere in the docs is the mention of 0-15 in decimal, but all of the hex examples are 0x10
+		 * (16). This is from 0 to 16 (17 values total). This makes the totall addressable servos 135
+		 * instead of 127. I think this is a mistake in the original documentation, but I could be wrong, too.
+		 *
 		 * Arguments:
 		 *   base_number: (unsigned short int) between 0x00-0x10 designating the servo offsets for this
 		 *   controller. For example, setting this to 0x0 means all 8 servo ports will be in the range
@@ -178,30 +183,19 @@ class CwPololuSerialServo {
 
 		/* Get the base number for the servo controller (via blinking light)
 		 *
-		 * Causes the controller to flash the green LED the number set to the controller. It may not
-		 * blink if you have this set to 0x00. This will cause ALL controllers on the serial bus to
+		 * Causes the controller to flash the green LED the number set to the controller. It should
+		 * blink at least once (1-16). This will cause ALL controllers on the serial bus to
 		 * flash.
 		 *
 		 * You need to run this only with the controller running in Pololu mode, not Mini SSC II.
 		 *
-		 * Of special note, the documentation claims that the addressing goes from 0x00 to 0x10.
-		 * Elsewhere in the docs is the mention of 0-15 in decimal, but all of the hex examples are 0x10
-		 * (16). This is from 0 to 16 (17 values total). This makes the totall addressable servos 135
-		 * instead of 127. I think this is a mistake in the original documentation, but I could be wrong, too.
-		 *
 		 * Arguments:
-		 *   base_number: (unsigned short int) between 0x00-0x0f designating the servo offsets for this
-		 *   controller. For example, setting this to 0x0 means all 8 servo ports will be in the range
-		 *   0-7. Setting this to 0x02 means the servos will be in the range: 15-23. 0x0f means that the
-		 *   servo port ids are in the range 120-127.
+		 *  N/A
 		 *
 		 * Returns:
-		 *  (int):
-		 *	*	0: success
-		 *	*	-2: base_number is out of range
+		 *  (void):
 		 */
-		int blink_servo_number_base_number( 
-				unsigned short int base_number = 0x0 );
+		void blink_servo_number_base_number();
 
 		inline static bool is_valid_servo_id( unsigned short int sn ) { return sn < 128; };
 	private:
