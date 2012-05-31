@@ -46,7 +46,7 @@ class CwPololuSerialServo {
 		 *		*	0: success
 		 *		*	-2: The servo number was out of range
 		 */
-		int set_speed(
+		int setSpeed(
 				unsigned short int servo_number,
 				unsigned short int speed = 0 );
 
@@ -70,7 +70,7 @@ class CwPololuSerialServo {
 		 *		*	0: success
 		 *		*	-2: The servo number was out of range
 		 */
-		int set_position(
+		int setPosition(
 				unsigned short int servo_number,
 				unsigned short int position = 0 );
 
@@ -92,7 +92,7 @@ class CwPololuSerialServo {
 		 *		*	-2: The servo number was out of range
 		 *		* -3: position is out of range
 		 */
-		int set_position_absolute(
+		int setPositionAbsolute(
 				unsigned short int servo_number,
 				unsigned int position = 500 );
 
@@ -115,7 +115,7 @@ class CwPololuSerialServo {
 		 *		*	-2: The servo number was out of range
 		 *		* -3: position is out of range
 		 */
-		int set_neutral(
+		int setNeutral(
 				unsigned short int servo_number,
 				unsigned int position = 3000 );
 
@@ -140,7 +140,7 @@ class CwPololuSerialServo {
 		 *		*	-2: The servo number was out of range
 		 *		* -3: The range was out of range (must be 0-15)
 		 */
-		int configure_servo(
+		int configureServo(
 				unsigned short int servo_number,
 				bool enabled = true,
 				bool forward_direction = true,
@@ -178,7 +178,7 @@ class CwPololuSerialServo {
 		 *	*	0: success
 		 *	*	-2: base_number is out of range
 		 */
-		int set_servo_number_base_number( 
+		int setServoNumberBaseNumber( 
 				unsigned short int base_number = 0x0 );
 
 		/* Get the base number for the servo controller (via blinking light)
@@ -195,9 +195,9 @@ class CwPololuSerialServo {
 		 * Returns:
 		 *  (void):
 		 */
-		void blink_servo_number_base_number();
+		void blinkServoNumberBaseNumber() const;
 
-		inline static bool is_valid_servo_id( unsigned short int sn ) { return sn < 128; };
+		inline static bool isValidServoId( unsigned short int sn ) { return sn < 128; };
 	private:
 		HardwareSerial *_serial;
 };

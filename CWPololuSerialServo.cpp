@@ -12,12 +12,12 @@ CwPololuSerialServo::CwPololuSerialServo( HardwareSerial *sout, unsigned int bau
 	sout->begin(baud);
 }
 
-int CwPololuSerialServo::set_speed(
+int CwPololuSerialServo::setSpeed(
 				unsigned short int servo_number,
 				unsigned short int speed
 	) {
 	unsigned char cmd[5];
-	if( !is_valid_servo_id(servo_number) ) return -2;
+	if( !CwPololuSerialServo::isValidServoId(servo_number) ) return -2;
 	if( speed > 127 ) return -3;
 	cmd[0] = 0x80; // start byte
 	cmd[1] = 0x01; // device id
@@ -29,12 +29,12 @@ int CwPololuSerialServo::set_speed(
 	return 0;
 }
 
-int CwPololuSerialServo::set_position(
+int CwPololuSerialServo::setPosition(
 				unsigned short int servo_number,
 				unsigned short int position
 	) {
 	unsigned char cmd[6]; // need enough for 8-bit version
-	if( !is_valid_servo_id(servo_number) ) return -2;
+	if( !CwPololuSerialServo::isValidServoId(servo_number) ) return -2;
 	cmd[0] = 0x80; // start byte
 	cmd[1] = 0x01; // device id
 	cmd[3] = servo_number;
@@ -53,12 +53,12 @@ int CwPololuSerialServo::set_position(
 	return 0;
 }
 
-int CwPololuSerialServo::set_position_absolute(
+int CwPololuSerialServo::setPositionAbsolute(
 				unsigned short int servo_number,
 				unsigned int position
 	) {
 	unsigned char cmd[6]; // need enough for 8-bit version
-	if( !is_valid_servo_id(servo_number) ) return -2;
+	if( !CwPololuSerialServo::isValidServoId(servo_number) ) return -2;
 	if( position > 5500 || position < 500 ) return -3;
 	cmd[0] = 0x80; // start byte
 	cmd[1] = 0x01; // device id
@@ -74,14 +74,14 @@ int CwPololuSerialServo::set_position_absolute(
 }
 
 
-int CwPololuSerialServo::configure_servo(
+int CwPololuSerialServo::configureServo(
 				unsigned short int servo_number,
 				bool enabled,
 				bool forward_direction,
 				unsigned short int range
 	) {
 	unsigned char cmd[5];
-	if( !is_valid_servo_id(servo_number) ) return -2;
+	if( !CwPololuSerialServo::isValidServoId(servo_number) ) return -2;
 	if( range > 15 ) return -3;
 	cmd[0] = 0x80; // start byte
 	cmd[1] = 0x01; // device id
@@ -96,7 +96,7 @@ int CwPololuSerialServo::configure_servo(
 	return 0;
 }
 
-int CwPololuSerialServo::set_servo_number_base_number(
+int CwPololuSerialServo::setServoNumberBaseNumber(
 		unsigned short int base_number )
 {
 	unsigned char cmd[3];
@@ -110,7 +110,7 @@ int CwPololuSerialServo::set_servo_number_base_number(
 	return 0;
 }
 
-void CwPololuSerialServo::blink_servo_number_base_number()
+void CwPololuSerialServo::blinkServoNumberBaseNumber() const
 {
 	unsigned char cmd[3];
 	// check validity of the base number.
