@@ -70,7 +70,7 @@ int CwPololuSerialServo::configureServo(
 	) {
 	unsigned char cmd[5] = { 0x80, 0x01, 0x00, 0x00, 0x00 };
 	if( !CwPololuSerialServo::isValidServoId(servo_number) ) return -2;
-	if( range > 15 ) return -3;
+	if( range > 0x1F ) return -3;
 	cmd[3] = servo_number;
 	if( enabled ) { bitSet(cmd[4],6); }
 	if( !forward_direction ) { bitSet(cmd[4],5); }

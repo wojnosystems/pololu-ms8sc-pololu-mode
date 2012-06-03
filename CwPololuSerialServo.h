@@ -25,10 +25,18 @@ class CwPololuSerialServo {
 		 * 
 		 * Creates and configures a new controller or set of controllers.
 		 *
+		 * You probably want to increase the baud rate as 9600 is a little slow. We've succesffully tested up to 40,000 and don't really recommend going much above this for fear of getting the flashing red LED of death.
+		 *
+		 * To create this class, simply:
+		 *
+		 *		CwPololuSerialServo servos( &Serial1, 40000 );
+		 *
+		 * That instantiates the class and calls it "servos." The servo controller must be connected to the TX1 (port 18) of the Arduino ATMega256. If you have an ArduinoUno, you'll need to connect to TX as you have only 1 UART. Now, you don't HAVE to use Serial1, the beauty of using pointers is that you can use any port you have access to. DO NOT call begin on the serial port! The library will do this for you.
+		 *
 		 */
 		CwPololuSerialServo(
 				HardwareSerial *sout,
-				unsigned int baud = 9600 );
+				unsigned int baud = 40000 );
 
 		/** Set Speed
 		 *
@@ -128,7 +136,7 @@ class CwPololuSerialServo {
 		 *  enabled: (bool) if you want to enable the servo, false to disable the PWM generator
 		 *  forward_direction: (bool) true to move in the "forward" direction when calling set_position,
 		 *  false to move backward. Ignored when calling set_position_absolute.
-		 *  range: (unsigned short int) between 0-15. 0 causes the servo to remain at neutral, 15 causes
+		 *  range: (unsigned short int) between 0-31. 0 causes the servo to remain at neutral, 15 causes
 		 *  8-bit commands to show up at 180 degress, 7-bit commands at 90 degrees. The range controls
 		 *  the pulse length of the output of the serial controller. See page 6 of the User Manual for
 		 *  details
@@ -137,7 +145,7 @@ class CwPololuSerialServo {
 		 *  (int):
 		 *		*	0: success
 		 *		*	-2: The servo number was out of range
-		 *		* -3: The range was out of range (must be 0-15)
+		 *		* -3: The range was out of range (must be 0-31)
 		 */
 		int configureServo(
 				unsigned short int servo_number,
