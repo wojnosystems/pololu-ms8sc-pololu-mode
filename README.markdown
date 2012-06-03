@@ -23,8 +23,8 @@ If you have git and a command line, here is a script to automagically install th
 
 install.bash:
 
-    mkdir ~/Documents/Arduino/libraries
-		git clone git://github.com/wojnosystems/pololu-ms8sc-pololu-mode.git ~/Documents/Arduino/libraries/CwPololuSerialServo
+	mkdir ~/Documents/Arduino/libraries
+	git clone git://github.com/wojnosystems/pololu-ms8sc-pololu-mode.git ~/Documents/Arduino/libraries/CwPololuSerialServo
 
 Remember, relaunch the Arduino IDE before trying to use any newly imported libraries.
 
