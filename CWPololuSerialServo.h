@@ -1,5 +1,5 @@
-#ifndef _CWPOLOLUMS8SC_H_
-#define _CWPOLOLUMS8SC_H_
+#ifndef _CWPOLOLUSERIALSERVO_H_
+#define _CWPOLOLUSERIALSERVO_H_
 
 class HardwareSerial;
 
@@ -202,4 +202,4 @@ class CwPololuSerialServo {
 };
 
 
-#endif//_CWPOLOLUMS8SC_H_
+#endif//_CWPOLOLUSERIALSERVO_H_
