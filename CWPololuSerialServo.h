@@ -1,7 +1,6 @@
 #ifndef _CWPOLOLUMS8SC_H_
 #define _CWPOLOLUMS8SC_H_
 
-#include <alloca.h>
 #include <HardwareSerial.h>
 
 /* Control a Pololu Serial Servo controller (Part #207)
