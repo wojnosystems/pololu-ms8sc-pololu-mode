@@ -1,7 +1,7 @@
 #ifndef _CWPOLOLUMS8SC_H_
 #define _CWPOLOLUMS8SC_H_
 
-#include <HardwareSerial.h>
+class HardwareSerial;
 
 /* Control a Pololu Serial Servo controller (Part #207)
  * http://www.pololu.com/catalog/product/207
