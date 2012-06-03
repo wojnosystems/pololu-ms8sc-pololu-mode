@@ -1,11 +1,5 @@
-#if (ARDUINO >= 100)
- #include "Arduino.h"
-#else
- #include <avr/io.h>
- #include "WProgram.h"
-#endif
+#include "Arduino.h"
 #include "CWPololuSerialServo.h"
-
 
 CwPololuSerialServo::CwPololuSerialServo( HardwareSerial *sout, unsigned int baud ) {
 	_serial = sout;
@@ -22,8 +16,8 @@ int CwPololuSerialServo::setSpeed(
 	cmd[0] = 0x80; // start byte
 	cmd[1] = 0x01; // device id
 	cmd[2] = 0x01; // command
-	cmd[3] = servo_number;
-	cmd[4] = speed;
+	cmd[3] = lowByte(servo_number);
+	cmd[4] = lowByte(speed);
 	_serial->write( cmd, 5 );
 	_serial->flush();
 	return 0;
@@ -37,16 +31,16 @@ int CwPololuSerialServo::setPosition(
 	if( !CwPololuSerialServo::isValidServoId(servo_number) ) return -2;
 	cmd[0] = 0x80; // start byte
 	cmd[1] = 0x01; // device id
-	cmd[3] = servo_number;
+	cmd[3] = lowByte(servo_number);
 	if( position > 127 ) { // 8-bit version
 		cmd[2] = 0x03; // command
 		cmd[4] = 0x01;
-		cmd[5] = (0x7f & position); // bitmask: 0111_1111 = 7f
+		cmd[5] = lowByte((0x7f & position)); // bitmask: 0111_1111 = 7f
 		_serial->write( cmd, 6 );
 		_serial->flush();
 	} else { // 7-bit version
-		cmd[2] = 0x02; // command
-		cmd[4] = position;
+		cmd[2] = 0x2; // command
+		cmd[4] = lowByte(position);
 		_serial->write( cmd, 5 );
 		_serial->flush();
 	}
@@ -62,12 +56,12 @@ int CwPololuSerialServo::setPositionAbsolute(
 	if( position > 5500 || position < 500 ) return -3;
 	cmd[0] = 0x80; // start byte
 	cmd[1] = 0x01; // device id
-	cmd[3] = servo_number;
 	cmd[2] = 0x04; // command
+	cmd[3] = servo_number;
 	// upper data bits: shift off lower bits
-	cmd[4] = (position>>7);
+	cmd[4] = lowByte((position>>7));
 	// lower data 7-bits
-	cmd[5] = (0x7f & position); // bitmask: 0111_1111 = 7f
+	cmd[5] = lowByte(0x7f & position); // bitmask: 0111_1111 = 7f
 	_serial->write( cmd, 6 );
 	_serial->flush();
 	return 0;
