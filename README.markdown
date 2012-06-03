@@ -39,3 +39,8 @@ Common errors
 -------------
 
 If your serial controller's read LED is flashing after you try to talk with it, then your BAUD rate may be set too hight. Try the recommended value in the docs: 45,000 and lower it if it's still giving you trouble.
+
+Warrantee
+---------
+
+This library and all it's files are provided as-is. Author is not responsible for it's misuse or any injury or damage caused by its use. Use at your own peril and discretion.
