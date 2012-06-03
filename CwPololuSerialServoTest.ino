@@ -1,6 +1,6 @@
 // Serial Test
 #include <ArduinoUnit.h>
-#include <CWPololuSerialServo.h>
+#include <CwPololuSerialServo.h>
 
 TestSuite suite;
 CwPololuSerialServo servos( &Serial1, 40000 );
