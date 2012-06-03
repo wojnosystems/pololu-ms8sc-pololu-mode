@@ -1,5 +1,5 @@
 #include "Arduino.h"
-#include "CWPololuSerialServo.h"
+#include "CwPololuSerialServo.h"
 
 CwPololuSerialServo::CwPololuSerialServo( HardwareSerial *sout, unsigned int baud ) {
 	_serial = sout;
