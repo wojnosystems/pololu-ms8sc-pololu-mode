@@ -110,7 +110,7 @@ int CwPololuSerialServo::setServoNumberBaseNumber(
 
 void CwPololuSerialServo::blinkServoNumberBaseNumber() const
 {
-	unsigned char cmd[3] = { 0x80, 0x02, 0x0f };
+	unsigned char cmd[3] = { 0x80, 0x02, 0x10 };
 	// check validity of the base number.
 	_serial->write( cmd, 3 );
 	_serial->flush();
